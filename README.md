@@ -1,5 +1,3 @@
-
-
 #E-Commerce Transaction Data Cleaning & Quality Improvement Project
 
 ##Project Overview
