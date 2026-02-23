@@ -1,6 +1,6 @@
-#E-Commerce Transaction Data Cleaning & Quality Improvement Project
+E-Commerce Transaction Data Cleaning & Quality Improvement Project
 
-##Project Overview
+Project Overview
 
 Olist is a Brazilian e-commerce marketplace that connects small and medium-sized merchants with major online retailers across Brazil. Operating across diverse product categories, payment methods, and geographic regions, the platform processes tens of thousands of transactions monthly, generating substantial revenue through credit card, boleto (Brazilian payment voucher), voucher, and debit card payment systems.
 
@@ -8,9 +8,7 @@ This project focused on a dataset of 99,540 e-commerce transactions spanning ord
 
 By applying systematic data cleaning methodologies in Microsoft Excel, this project transformed unreliable raw data into a production-ready dataset of 99,367 clean, validated records. The cleaning process removed 173 problematic entries (0.17% of the dataset) while preserving all legitimate transactions. The refined dataset now supports accurate financial reporting, delivery performance analysis, payment method optimization, and data-driven decision-making across the e-commerce operation.
 
-
-
-##Tools & Methodology
+Tools & Methodology
 
 The entire data cleaning workflow was executed in Microsoft Excel, leveraging a combination of formulas, built-in data validation tools, filtering mechanisms, and systematic quality checks to ensure both efficiency and thoroughness.
 
@@ -18,7 +16,7 @@ The dataset consisted of 99,540 rows and 12 columns, capturing critical transact
 
 
 
-##Pre-Cleaning Data Profiling
+Pre-Cleaning Data Profiling
 
 Prior to executing any cleaning operations, a comprehensive data quality assessment was conducted to map the full landscape of issues. This profiling exercise revealed that 24% of records (23,995 entries) had improperly formatted zip codes due to leading zeros being dropped during data import—a common issue when numeric fields are stored without proper formatting constraints. Additionally, 90 duplicate orders were identified, representing potential double-counting in revenue calculations. Payment data was entirely absent for 81 orders, rendering them unusable for financial analysis. Three orders displayed "not_defined" as the payment method, and three additional orders recorded zero-value payments—both categories representing data entry failures or system errors.
 
@@ -26,9 +24,7 @@ Text standardization issues were pervasive: the payment_type field contained the
 
 Each quality issue was then addressed through a targeted intervention designed to preserve data integrity while removing ambiguity. Changes were implemented sequentially, with validation checks performed after each step to prevent cascading errors.
 
-
-
-##Data Cleaning Process & Findings
+Data Cleaning Process & Findings
 
 1. Text Standardization Across Categorical Fields
 
@@ -36,24 +32,24 @@ Issue Identified:
 
 Payment method and order status fields exhibited inconsistent capitalization, spacing, and delimiter usage. For example, credit card payments appeared as "credit_card" (standard format), "CREDIT CARD" (all caps), "Credit_Card" (mixed case), "creditcard" (no delimiter), and "credit card" (space instead of underscore). This variability prevented accurate grouping and made any analysis of payment preferences unreliable.
 
-#Cleaning Method
+Cleaning Method
 
 The TRIM and LOWER functions were applied to all categorical text fields to enforce uniform lowercase formatting and remove extraneous whitespace. A new column was created alongside each original field, populated with the formula =TRIM(LOWER(original_cell)). Once validated, the cleaned values were copied and pasted as static text, replacing the original inconsistent data.
 
 Residual formatting issues that survived the initial formula application—specifically 1,531 instances of "creditcard" (no underscore) and 59 instances of "debit card" (space instead of underscore)—were corrected using Excel's Find & Replace function with exact match criteria to avoid unintended replacements.
 
 
-#Business Impact:
+Business Impact:
 
 This standardization ensures that payment method analysis accurately reflects customer behavior. Without this correction, a summary of credit card usage would have fragmented the same payment type across five separate categories, artificially deflating the prominence of credit card transactions and potentially misleading marketing or partnership strategies with payment processors.
 
-##2. Removal of Duplicate Transactionsppp
+2. Removal of Duplicate Transactionsppp
 
 Issue Identified
 
 Ninety records were exact duplicates across all 12 columns, suggesting either system errors during data export or duplicate order submissions that were not properly flagged in the source database.
 
-#Cleaning Method
+Cleaning Method
 
 Excel's Remove Duplicates tool was applied to the full dataset with all columns selected as comparison criteria. This ensured that only perfect duplicates—rows identical in every field—were removed, while similar but legitimately distinct orders (such as repeat purchases by the same customer) were preserved.
 
@@ -66,7 +62,7 @@ Business Impact:
 
 Duplicate removal prevents revenue double-counting, which would have inflated financial performance metrics by 0.09%. In a high-volume e-commerce environment, even small percentage errors compound into significant misrepresentations of business health. Removing these duplicates ensures that order counts, revenue totals, and customer transaction frequencies reflect actual business activity.
 
-#3. Elimination of Incomplete and Invalid Payment Records
+3. Elimination of Incomplete and Invalid Payment Records
 
 Issue Identified:
 
@@ -86,7 +82,7 @@ Business Impact
 
 Orders without payment data contribute no value to financial reporting, customer segmentation, or operational analysis. Retaining them would have skewed average calculations, introduced noise into payment method trends, and complicated reconciliation between order volume and actual revenue. Their removal ensures that every record in the cleaned dataset represents a complete, analyzable business transaction.
 
-#4. Strategic Retention of Missing Delivery Dates
+4. Strategic Retention of Missing Delivery Dates
 
 Issue Identified:
 
@@ -102,7 +98,7 @@ Missing delivery dates do not represent data quality failures—they represent o
 
 By preserving these blanks, the dataset retains the ability to distinguish between "not yet delivered" and "delivered late," which is essential for operational performance tracking.
 
-#5. Numerical Formatting for Financial Clarity
+5. Numerical Formatting for Financial Clarity
 
 Issue Identified
 
@@ -117,7 +113,7 @@ Business Impact:
 Professional numerical formatting improves readability in dashboards and reports, reduces interpretation errors during stakeholder presentations, and ensures that currency values are displayed with appropriate precision for financial reconciliation.
 
 
-#6. Outlier Identification and Retention
+6. Outlier Identification and Retention
 
 Issue Identified:
 
@@ -136,7 +132,7 @@ High-value transactions are not inherently invalid. In e-commerce environments, 
 The outlier was flagged for stakeholder review but preserved in the cleaned dataset to ensure completeness. If subsequent investigation reveals it to be erroneous, it can be removed in a future iteration with documented justification.
 
 
-##Key Quality Improvements
+Key Quality Improvements
 
 The cleaning process delivered measurable improvements across multiple dimensions of data quality:
 
@@ -150,7 +146,7 @@ Validity: Invalid entries (undefined payment types, zero-value payments) have be
 
 Dataset Reduction: From 99,540 initial rows to 99,367 final rows—a reduction of 173 records (0.17%)—indicating that the vast majority of the source data was salvageable and that cleaning operations were surgical rather than destructive.
 
-##Recommendations for Continuous Data Quality Improvement
+Recommendations for Continuous Data Quality Improvement
 
 Based on the issues identified during this cleaning exercise, the following systemic improvements are recommended to prevent recurrence and reduce future cleaning overhead:
 
@@ -207,7 +203,7 @@ This playbook should be accessible to all team members and updated as new edge c
 
 Expected Impact: Consistency across analysts, reduced onboarding time for new team members, and institutional knowledge preservation.
 
-##Limitations & Considerations
+Limitations & Considerations
 
 1. Temporal Scope
 
@@ -225,7 +221,7 @@ The decision to retain missing delivery dates assumes that these represent order
 
 The $13,664 outlier was retained based on the assumption that high-value transactions are plausible in an e-commerce context. However, this transaction was not verified against external records (invoices, payment processor logs, customer service notes). If further investigation reveals it to be erroneous, the dataset would require re-cleaning and any dependent analyses would need revision.
 
-##Conclusion
+Conclusion
 
 This project demonstrates that the Olist e-commerce dataset, despite exhibiting multiple categories of quality issues, was fundamentally sound and required only targeted interventions rather than wholesale reconstruction. By removing 173 problematic records (0.17% of the dataset) and standardizing text formatting across categorical fields, the dataset was transformed from an unreliable raw export into a production-ready analytical asset.
 
